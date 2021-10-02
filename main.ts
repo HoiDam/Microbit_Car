@@ -1,45 +1,18 @@
-input.onButtonPressed(Button.A, function () {
-    basic.showLeds(`
-        . . # . .
-        . # # # .
-        # . # . #
-        . . # . .
-        . . # . .
-        `)
-    wuKong.setAllMotor(100, 100)
+radio.onReceivedNumber(function (receivedNumber) {
+    radio_no = receivedNumber
 })
-input.onGesture(Gesture.LogoUp, function () {
-    basic.showArrow(ArrowNames.South)
-})
-input.onGesture(Gesture.TiltLeft, function () {
-    basic.showArrow(ArrowNames.West)
-})
-input.onButtonPressed(Button.AB, function () {
-    wuKong.setAllMotor(-100, -100)
-    basic.pause(100)
-    wuKong.stopAllMotor()
-})
-input.onButtonPressed(Button.B, function () {
-    basic.showLeds(`
-        . . # . .
-        . . # . .
-        # . # . #
-        . # # # .
-        . . # . .
-        `)
-    wuKong.setAllMotor(-100, -100)
-})
-input.onGesture(Gesture.TiltRight, function () {
-    basic.showArrow(ArrowNames.East)
-})
-input.onGesture(Gesture.LogoDown, function () {
-    basic.showArrow(ArrowNames.North)
-})
-input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    wuKong.setAllMotor(100, 100)
-    basic.pause(100)
-    wuKong.stopAllMotor()
-})
+let radio_no = 0
+radio.setGroup(194)
 basic.forever(function () {
-	
+    if (radio_no == 1) {
+        wuKong.setAllMotor(100, 100)
+    } else if (radio_no == 2) {
+        wuKong.setAllMotor(-100, -100)
+    } else if (radio_no == 3) {
+        wuKong.setAllMotor(100, -100)
+    } else if (radio_no == 4) {
+        wuKong.setAllMotor(-100, 100)
+    } else {
+        wuKong.setAllMotor(0, 0)
+    }
 })
